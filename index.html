@@ -1,14 +1,38 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-client="default">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Maksim Kalyuzhnyi — speaking decks</title>
-  <meta http-equiv="refresh" content="0; url=2026/СБЕР/Сбер_оценка_рынка_2026_lecture.html" />
+  <title>Maksim Kalyuzhnyi — talks</title>
+  <link rel="stylesheet" href="brand.css" />
+  <style>
+    body { margin: 0; padding: 2.5rem 1.5rem 4rem; max-width: 42rem; margin-inline: auto; font-family: var(--brand-font); color: var(--brand-text); background: var(--brand-bg); line-height: 1.55; }
+    .eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-accent); margin-bottom: 0.75rem; }
+    h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; text-transform: uppercase; margin: 0 0 1rem; letter-spacing: -0.02em; }
+    p.lead { color: var(--brand-muted); margin: 0 0 2rem; }
+    ul.talk-list { list-style: none; padding: 0; margin: 0; }
+    ul.talk-list li { border: 1px solid var(--brand-border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; transition: border-color 0.15s; }
+    ul.talk-list li:hover { border-color: var(--brand-accent); }
+    ul.talk-list a { color: var(--brand-text); text-decoration: none; font-weight: 600; font-size: 1.05rem; }
+    ul.talk-list .meta { font-size: 0.85rem; color: var(--brand-muted); margin-top: 0.35rem; }
+    footer { margin-top: 3rem; font-size: 0.88rem; color: var(--brand-muted); }
+    a.hub-link { color: var(--brand-accent); font-weight: 600; }
+  </style>
 </head>
 <body>
-  <p style="font-family: system-ui, sans-serif; padding: 2rem;">
-    <a href="2026/СБЕР/Сбер_оценка_рынка_2026_lecture.html">Оценка рынка в эпоху AI — веб-дек (2026)</a>
-  </p>
+  <span class="eyebrow">Public speaking</span>
+  <h1>Доклады</h1>
+  <p class="lead">Статические веб-деки и материалы. Новые страницы — по мере выступлений.</p>
+  <ul class="talk-list">
+    <li>
+      <a href="talks/sber-market-ai-2026/">Оценка рынка в эпоху AI</a>
+      <div class="meta">Сбер · апрель 2026 · рынок, guardrails, AI-native workflow</div>
+    </li>
+  </ul>
+  <footer>
+    Репозиторий: <a class="hub-link" href="https://github.com/max-kalyuzhnyi/public-speaking">github.com/max-kalyuzhnyi/public-speaking</a>
+    · <a class="hub-link" href="market-analysis-skill.md">market-analysis-skill.md</a>
+    · <a class="hub-link" href="market-analysis-checklist.md">market-analysis-checklist.md</a>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,9 @@
+{
+  "title": "Оценка рынка в эпоху AI (Сбер, апр. 2026)",
+  "content_source": "content.md",
+  "web_deck": "index.html",
+  "brand_client": "sber",
+  "presentation_engine": "static-html",
+  "assets_dir": "lecture_assets",
+  "notes": "Canonical path: repo talks/sber-market-ai-2026. Local workspace: Выступления/2026/СБЕР → symlink here."
+}

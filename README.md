@@ -1,31 +1,33 @@
 # public-speaking
 
-Brand tokens, Gilroy, and a static web deck for talks. Published with **GitHub Pages**.
+Brand assets, shared skills, and **static talk sites** — published with **GitHub Pages**.
+
+## Single source of truth
+
+- **Canonical repo:** this directory (`public-speaking` git root).
+- **Local workspace:** `Выступления/2026/СБЕР` is a **symlink** → `talks/sber-market-ai-2026` (edit the deck there; same files).
+- **Legacy files** (PDF, Key, старые деки) лежат в `Выступления/2026/СБЕР_archive` — не в репозитории.
+
+## Site structure
+
+| URL path | Content |
+|----------|---------|
+| `/` | Hub: список докладов (`index.html`) |
+| `/talks/sber-market-ai-2026/` | Сбер 2026: `index.html` + `content.md` + `lecture_assets/` |
+| `/brand.css`, `/brand.json`, … | Общий бренд |
+| `/market-analysis-skill.md` | Skill для агента |
+| `/market-analysis-checklist.md` | Чеклист для себя |
 
 ## Live site
 
-After Pages is enabled: `https://max-kalyuzhnyi.github.io/public-speaking/`
+`https://max-kalyuzhnyi.github.io/public-speaking/`
 
-Entry point redirects to the latest deck under `2026/СБЕР/`.
+Entry point is the **hub**, not a single talk.
 
-## Repo layout
+## GitHub Pages
 
-| Path | Purpose |
-|------|---------|
-| `brand.json`, `brand.schema.json`, `brand.md`, `brand.css` | Design tokens + CSS |
-| `Gilroy/*.otf` | Font files referenced by `brand.css` |
-| `market-analysis-skill.md` | AI-agent skill (workflow + prompts) |
-| `market-analysis-checklist.md` | Human checklist |
-| `recommended-vscode-settings.json` | Optional VS Code/Cursor paste-to-markdown helper |
-| `2026/СБЕР/*` | Lecture content + `lecture_assets/` |
-
-## GitHub Pages setup
-
-1. Repo **Settings → Pages → Build and deployment**
-2. **Source:** Deploy from a branch
-3. **Branch:** `main`, folder **`/` (root)**
-4. Save. The site will be available in ~1–2 minutes at the URL above.
+Settings → Pages → branch **main**, folder **`/` (root)**.
 
 ## Local preview
 
-Open `index.html` or the deck HTML in a browser from a local checkout (relative paths assume repo root).
+Open `index.html` in the browser, or open `talks/sber-market-ai-2026/index.html` (paths assume repo root for `brand.css`).
