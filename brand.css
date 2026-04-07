@@ -1,0 +1,115 @@
+/**
+ * Design tokens synced with brand.json (keep values aligned manually or via script).
+ * Client accent: set data-client on <html> to sber | vtb | skolkovo | default
+ */
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("Gilroy/Gilroy-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("Gilroy/Gilroy-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("Gilroy/Gilroy-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("Gilroy/Gilroy-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("Gilroy/Gilroy-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("Gilroy/Gilroy-Extrabold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --brand-bg: #ffffff;
+  --brand-text: #1a1f16;
+  --brand-accent: #1a2744;
+  --brand-accent-dim: #141d33;
+  --brand-muted: #6b7280;
+  --brand-border: #e2e8df;
+  --brand-danger: #d94040;
+  --brand-success: #0d8a3e;
+  --brand-warning: #e5a000;
+  --brand-font: "Gilroy", system-ui, sans-serif;
+  --brand-mono: ui-monospace, "Cascadia Code", monospace;
+}
+
+/* Client accent overrides (matches brand.json clients.*.accent) */
+html[data-client="sber"] {
+  --brand-accent: #0d8a3e;
+  --brand-accent-dim: #0a6e32;
+}
+
+html[data-client="vtb"] {
+  --brand-accent: #003087;
+  --brand-accent-dim: #002266;
+}
+
+html[data-client="skolkovo"] {
+  --brand-accent: #e31e24;
+  --brand-accent-dim: #b81820;
+}
+
+html[data-client="default"] {
+  --brand-accent: #1a2744;
+  --brand-accent-dim: #141d33;
+}
+
+/* Section titles — ALL CAPS pattern for deck headings */
+.brand-section-title {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand-text);
+}
+
+.brand-subtitle {
+  font-weight: 600;
+  text-transform: none;
+  color: var(--brand-text);
+}
+
+.brand-muted {
+  color: var(--brand-muted);
+}
+
+.brand-tag-danger {
+  background: var(--brand-danger);
+  color: #fff;
+}
+
+.brand-tag-success {
+  background: var(--brand-success);
+  color: #fff;
+}

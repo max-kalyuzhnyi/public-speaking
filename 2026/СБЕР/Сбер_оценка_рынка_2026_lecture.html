@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<!-- data-client: sber | vtb | skolkovo | default -->
+<html lang="ru" data-client="sber">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Оценка рынка в эпоху AI — Сбер 2026</title>
+  <link rel="stylesheet" href="../../brand.css" />
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--brand-font);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--brand-text);
+      background: var(--brand-bg);
+    }
+
+    /* ─── Toolbar ─── */
+    .toolbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0.65rem 1.5rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--brand-border);
+      font-size: 0.82rem;
+    }
+
+    .toolbar-nav {
+      display: flex;
+      gap: 0.75rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+
+    .toolbar-nav a {
+      color: var(--brand-muted);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-size: 0.73rem;
+      padding: 0.2rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .toolbar-nav a:hover,
+    .toolbar-nav a.active {
+      color: var(--brand-accent);
+      border-bottom-color: var(--brand-accent);
+    }
+
+    .progress {
+      flex: 1;
+      height: 3px;
+      background: var(--brand-border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--brand-accent), var(--brand-success));
+      transition: width 0.2s ease;
+    }
+
+    .toolbar-hint {
+      font-size: 0.75rem;
+      color: var(--brand-muted);
+      white-space: nowrap;
+    }
+
+    /* ─── Sections ─── */
+    main { padding-top: 3.5rem; }
+
+    section {
+      min-height: 100vh;
+      padding: 4rem 1.5rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 56rem;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--brand-border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    /* ─── Typography ─── */
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand-accent);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      margin: 0 0 1.25rem;
+      color: var(--brand-text);
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--brand-text);
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem;
+      color: var(--brand-text);
+    }
+
+    p { margin: 0 0 1rem; }
+
+    .lead {
+      font-size: 1.2rem;
+      color: var(--brand-muted);
+      max-width: 42rem;
+      line-height: 1.55;
+    }
+
+    ul, ol {
+      margin: 0 0 1rem;
+      padding-left: 1.35rem;
+    }
+
+    li { margin-bottom: 0.4rem; }
+
+    code {
+      font-family: var(--brand-mono);
+      font-size: 0.88em;
+      background: rgba(26,39,68,0.07);
+      border-radius: 4px;
+      padding: 0.1em 0.35em;
+    }
+
+    pre {
+      font-family: var(--brand-mono);
+      font-size: 0.88rem;
+      background: rgba(26,39,68,0.05);
+      border: 1px solid var(--brand-border);
+      border-left: 3px solid var(--brand-accent);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre-wrap;
+    }
+
+    /* ─── Cards ─── */
+    .card {
+      background: #fff;
+      border: 1px solid var(--brand-border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 0.75rem 0;
+    }
+
+    .card-danger { border-left: 3px solid var(--brand-danger); }
+    .card-success { border-left: 3px solid var(--brand-success); }
+    .card-accent  { border-left: 3px solid var(--brand-accent); }
+
+    .grid2 {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    /* ─── Tag / badge ─── */
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      margin-right: 0.35rem;
+      vertical-align: middle;
+    }
+
+    .tag-accent  { background: var(--brand-accent);  color: #fff; }
+    .tag-danger  { background: var(--brand-danger);  color: #fff; }
+    .tag-success { background: var(--brand-success); color: #fff; }
+    .tag-muted   { background: var(--brand-border);  color: var(--brand-muted); }
+
+    /* ─── Formula block ─── */
+    .formula {
+      font-family: var(--brand-mono);
+      font-size: 1rem;
+      background: rgba(26,39,68,0.05);
+      border: 1px solid var(--brand-border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      margin: 1rem 0;
+      line-height: 1.7;
+    }
+
+    .formula .numerator   { display: block; }
+    .formula .divider     { display: block; height: 2px; background: var(--brand-text); margin: 0.5rem auto; max-width: 24rem; }
+    .formula .denominator { display: block; color: var(--brand-danger); font-weight: 600; }
+
+    /* ─── Tables ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.93rem;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      border: 1px solid var(--brand-border);
+      padding: 0.65rem 0.8rem;
+      text-align: left;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Slide figures ─── */
+    .slide-figure {
+      margin: 1.5rem 0;
+    }
+
+    .slide-figure img {
+      width: 100%;
+      max-width: 56rem;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--brand-border);
+      display: block;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .slide-figure figcaption {
+      font-size: 0.78rem;
+      color: var(--brand-muted);
+      margin-top: 0.45rem;
+    }
+
+    /* ─── Checklist ─── */
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .checklist li::before {
+      content: "□";
+      font-size: 1.1rem;
+      color: var(--brand-danger);
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    /* ─── Blockquote ─── */
+    blockquote {
+      border-left: 3px solid var(--brand-accent);
+      margin: 1.25rem 0;
+      padding: 0.75rem 1.25rem;
+      background: rgba(26,39,68,0.04);
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: var(--brand-text);
+    }
+
+    /* ─── Footer ─── */
+    .footer-strip {
+      margin-top: auto;
+      padding-top: 2rem;
+      font-size: 0.88rem;
+      color: var(--brand-muted);
+    }
+
+    /* ─── Speaker bio (photo + logos from source; typography native) ─── */
+    section#bio h1.bio-name {
+      text-transform: none;
+      font-size: clamp(1.65rem, 3.2vw, 2.15rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+    }
+
+    .bio-name-ru {
+      color: var(--brand-muted);
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0 0 1.5rem;
+    }
+
+    .bio-grid {
+      display: grid;
+      grid-template-columns: minmax(200px, 320px) 1fr;
+      gap: 2rem 2.5rem;
+      align-items: start;
+      width: 100%;
+    }
+
+    @media (max-width: 720px) {
+      .bio-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Keep portrait aspect ratio — grid/flex can otherwise stretch the img */
+    .bio-photo-wrap {
+      align-self: start;
+      justify-self: start;
+      width: 100%;
+      max-width: 320px;
+      line-height: 0;
+    }
+
+    .bio-photo {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 320px;
+      aspect-ratio: 789 / 1024;
+      object-fit: contain;
+      object-position: top center;
+      border-radius: 12px;
+      border: 1px solid var(--brand-border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .bio-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .bio-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem 1.5rem;
+      flex-wrap: wrap;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--brand-border);
+    }
+
+    .bio-row:last-child { border-bottom: none; }
+
+    .bio-role {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--brand-text);
+      flex: 1 1 12rem;
+      line-height: 1.45;
+    }
+
+    .bio-role-note {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--brand-muted);
+      margin-top: 0.2rem;
+    }
+
+    .bio-logo {
+      height: clamp(1.85rem, 3.5vw, 2.6rem);
+      width: auto;
+      max-width: min(280px, 48vw);
+      object-fit: contain;
+      object-position: right center;
+      flex-shrink: 0;
+    }
+
+    .bio-logo--tall {
+      height: clamp(2.25rem, 4vw, 3.1rem);
+    }
+
+    /* ─── Red flags: large tile cards (multi-slide) ─── */
+    .flag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.35rem;
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+
+    @media (min-width: 900px) {
+      .flag-grid { grid-template-columns: repeat(3, 1fr); }
+      .flag-grid--two { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 899px) {
+      .flag-grid--two { grid-template-columns: 1fr; }
+    }
+
+    /* 2×2 grid for four tiles */
+    .flag-grid--quad {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 520px) {
+      .flag-grid--quad { grid-template-columns: 1fr; }
+    }
+
+    .flag-tile {
+      background: #fff;
+      border: 1px solid var(--brand-border);
+      border-radius: 14px;
+      padding: 1.5rem 1.4rem;
+      min-height: 10.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 4px solid var(--brand-danger);
+      box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+    }
+
+    .flag-tile-num {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brand-danger);
+      margin-bottom: 0.65rem;
+    }
+
+    .flag-tile p {
+      margin: 0;
+      font-size: clamp(1.02rem, 1.9vw, 1.18rem);
+      line-height: 1.45;
+      font-weight: 600;
+      color: var(--brand-text);
+    }
+
+    .flag-tile .flag-arrow {
+      color: var(--brand-muted);
+      font-weight: 600;
+    }
+
+    .flag-footer-note {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: var(--brand-muted);
+      line-height: 1.5;
+      max-width: 40rem;
+    }
+
+    /* Green tiles (AI strengths) — same geometry as .flag-tile */
+    .flag-tile--good {
+      border-left-color: var(--brand-success);
+    }
+
+    .flag-tile--good .flag-tile-num {
+      color: var(--brand-success);
+    }
+
+    /* Do / Don't paired rows */
+    .do-pair-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+      margin-top: 1.25rem;
+      width: 100%;
+    }
+
+    .do-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.15rem;
+      align-items: stretch;
+    }
+
+    @media (max-width: 800px) {
+      .do-pair { grid-template-columns: 1fr; }
+    }
+
+    .do-tile {
+      background: #fff;
+      border: 1px solid var(--brand-border);
+      border-radius: 14px;
+      padding: 1.35rem 1.3rem;
+      min-height: 5.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      font-size: clamp(0.98rem, 1.7vw, 1.08rem);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .do-tile--yes {
+      border-left: 4px solid var(--brand-success);
+    }
+
+    .do-tile--no {
+      border-left: 4px solid var(--brand-danger);
+    }
+
+    .do-tile-label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+
+    .do-tile--yes .do-tile-label { color: var(--brand-success); }
+    .do-tile--no .do-tile-label { color: var(--brand-danger); }
+
+    /* Do-only / Don't-only columns (no pairing) */
+    .do-stack {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.1rem;
+      margin-top: 1rem;
+      width: 100%;
+    }
+
+    .do-stack .do-tile {
+      min-height: 4.5rem;
+    }
+
+    .do-stack .do-tile--yes .do-tile-label,
+    .do-stack .do-tile--no .do-tile-label {
+      display: none;
+    }
+
+    /* ─── Print ─── */
+    @media print {
+      .toolbar { position: static; }
+      main { padding-top: 0; }
+      section { min-height: auto; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="toolbar" role="navigation" aria-label="Навигация">
+  <ul class="toolbar-nav" id="navLinks">
+    <li><a href="#intro">Старт</a></li>
+    <li><a href="#bio">Спикер</a></li>
+    <li><a href="#framework">Фреймворк</a></li>
+    <li><a href="#changed">AI = аналитик</a></li>
+    <li><a href="#framing">Задача</a></li>
+    <li><a href="#guardrails">Guardrails</a></li>
+    <li><a href="#strategy">Стратегия</a></li>
+    <li><a href="#practice">Практика</a></li>
+    <li><a href="#recap">Recap</a></li>
+    <li><a href="#cheat-sheet">Шпаргалка</a></li>
+  </ul>
+  <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+  <span class="toolbar-hint">← → листать</span>
+</div>
+
+<main>
+
+  <!-- 1 ══ INTRO -->
+  <section id="intro">
+    <span class="eyebrow">Сбер · апрель 2026</span>
+    <h1>Оценка рынка в эпоху AI</h1>
+    <p class="lead">Как поставить задачу и не дать AI соврать.</p>
+    <div class="card card-accent">
+      <strong>О чем поговорим?</strong>
+      <ol style="margin-top:0.75rem;">
+        <li>Зачем оценивать рынок — фреймворк (не устарел)</li>
+        <li>Что изменилось: AI как аналитик</li>
+        <li>Как правильно поставить задачу AI</li>
+        <li>Guardrails: как не дать AI соврать</li>
+        <li>Стратегический фильтр</li>
+        <li>Практика прямо сейчас</li>
+      </ol>
+    </div>
+    <div class="footer-strip">Максим Калюжный · TG @max_kalyuzhnyi · +351 93 783 8051</div>
+  </section>
+
+  <!-- 1b ══ SPEAKER BIO -->
+  <section id="bio">
+    <span class="eyebrow">Спикер</span>
+    <div class="bio-grid">
+      <div class="bio-photo-wrap">
+        <img class="bio-photo" src="lecture_assets/speaker-photo.png" alt="" width="789" height="1024" loading="eager" decoding="async" />
+      </div>
+      <div class="bio-copy">
+        <h1 class="bio-name">Максим Калюжный</h1>
+        <p class="bio-name-ru"></p>
+        <ul class="bio-list">
+          <li class="bio-row">
+            <span class="bio-role">Head of Finance</span>
+            <img class="bio-logo" src="lecture_assets/logo-makina.png" alt="Makina" width="313" height="54" loading="lazy" decoding="async" />
+          </li>
+          <li class="bio-row">
+            <span class="bio-role">Ex-Head of Ops</span>
+            <img class="bio-logo" src="lecture_assets/logo-everclear.png" alt="Everclear" width="313" height="54" loading="lazy" decoding="async" />
+          </li>
+          <li class="bio-row">
+            <span class="bio-role">
+              Co-founder, CFO &amp; B2B
+              <span class="bio-role-note">Компания продана (exit)</span>
+            </span>
+            <img class="bio-logo bio-logo--tall" src="lecture_assets/logo-yasno.png" alt="Ясно" width="288" height="85" loading="lazy" decoding="async" />
+          </li>
+          <li class="bio-row">
+            <span class="bio-role">Ex-Big 4 аудитор/консультант</span>
+            <img class="bio-logo bio-logo--tall" src="lecture_assets/logo-big4.png" alt="PwC, KPMG" width="313" height="103" loading="lazy" decoding="async" />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 ══ FRAMEWORK: зачем -->
+  <section id="framework">
+    <span class="eyebrow">Блок 0 · Фреймворк</span>
+    <h1>Почему оценка рынка важна</h1>
+    <p class="lead">Этот блок не устарел — это фреймворк мышления, не метод вычисления.</p>
+    <div class="formula">
+      <span class="numerator">Рынок × (доля, выручка, прибыль) × Активы × Вера в успех</span>
+      <span class="divider"></span>
+      <span class="denominator">СЛОЖНОСТЬ = Время + Люди + Деньги</span>
+    </div>
+    <figure class="slide-figure">
+      <img src="lecture_assets/slide-08.png" alt="Фреймворк оценки проектов" width="1920" height="1080" loading="lazy" decoding="async" />
+      <figcaption>Слайд из деки 2025 (стр. 8)</figcaption>
+    </figure>
+  </section>
+
+  <!-- 3 ══ FRAMEWORK: три вопроса -->
+  <section id="three-questions">
+    <span class="eyebrow">Блок 0 · Фреймворк</span>
+    <h1>Три вопроса оценки рынка</h1>
+    <ol>
+      <li><strong>Есть ли там деньги?</strong> — можно ли монетизировать продукт</li>
+      <li><strong>Достаточно ли денег?</strong> — связка с <em>существенностью</em></li>
+      <li><strong>Сколько реалистично заработать</strong> при текущем продукте и горизонте?</li>
+    </ol>
+  </section>
+
+  <!-- 4 ══ FRAMEWORK: существенность -->
+  <section id="materiality">
+    <span class="eyebrow">Блок 0 · Фреймворк</span>
+    <h1>Существенность</h1>
+    <p>Порог: <strong>1% выручки / 5% PBT или EBITDA</strong> — калибруйте под компанию.</p>
+    <div class="card card-accent">
+      <strong>Пример — Группа Сбер, МСФО 2025</strong>
+      <ul style="margin-top:0.5rem;">
+        <li>Операционный доход ≈ 4,4 трлн → <strong>1% ≈ 44 млрд</strong></li>
+        <li>Чистая прибыль = 1,7 трлн → <strong>5% ≈ 85 млрд</strong></li>
+      </ul>
+      <p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--brand-muted);">Источник: пресс-релиз Группы Сбер, февраль 2026</p>
+    </div>
+    <figure class="slide-figure">
+      <img src="lecture_assets/slide-17.png" alt="Иллюстрация порогов 1% и 5%" width="1920" height="1080" loading="lazy" decoding="async" />
+      <figcaption>Пример масштаба существенности (стр. 17)</figcaption>
+    </figure>
+  </section>
+
+  <!-- 5 ══ FRAMEWORK: активы -->
+  <section id="assets">
+    <span class="eyebrow">Блок 0 · Фреймворк</span>
+    <h1>Типы активов</h1>
+    <p class="lead">Что именно вы оцениваете — и почему активы меняют всё.</p>
+    <figure class="slide-figure">
+      <img src="lecture_assets/slide-11.png" alt="Типы активов — ось сложность × стоимость" width="1920" height="1080" loading="lazy" decoding="async" />
+      <figcaption>Матрица активов (стр. 11)</figcaption>
+    </figure>
+  </section>
+
+  <!-- 6 ══ FRAMEWORK: TAM/SAM/SOM -->
+  <section id="tam">
+    <span class="eyebrow">Блок 0 · Фреймворк</span>
+    <h1>TAM · SAM · SOM</h1>
+    <table>
+      <thead><tr><th>Метрика</th><th>Смысл</th></tr></thead>
+      <tbody>
+        <tr><td><strong>TAM</strong></td><td>Суммарный спрос на продукт или сервис</td></tr>
+        <tr><td><strong>SAM</strong></td><td>Целевой сегмент (фокус или география)</td></tr>
+        <tr><td><strong>SOM</strong></td><td>Целевая доля в сегменте</td></tr>
+      </tbody>
+    </table>
+    <figure class="slide-figure">
+      <img src="lecture_assets/slide-24.png" alt="TAM / SAM / SOM" width="1920" height="1080" loading="lazy" decoding="async" />
+      <figcaption>Стр. 24</figcaption>
+    </figure>
+  </section>
+
+  <!-- 7a ══ CHANGED: контекст -->
+  <section id="changed">
+    <span class="eyebrow">Блок 1 · Что изменилось</span>
+    <h1>AI как аналитик</h1>
+    <p class="lead">Год назад вы искали данные вручную. Сегодня AI делает это за минуты.</p>
+    <p class="lead" style="margin-top:1.25rem;font-size:1.35rem;color:var(--brand-text);font-weight:600;">Человек не нужен?</p>
+  </section>
+
+  <!-- 7b ══ CHANGED: демо -->
+  <section id="changed-demo">
+    <span class="eyebrow">Блок 1 · Что изменилось</span>
+    <h1>Демо</h1>
+    <p class="lead">Просим AI оценить рынок — например, онлайн-сервисы для ИП в РФ в 2026.</p>
+    <div class="card card-accent">
+      <p style="margin:0;">Типичный ответ: TAM = 150 млрд, SAM = 40 млрд, SOM = 5–12 млрд.</p>
+    </div>
+    <p style="margin-top:1.25rem;font-size:1.1rem;font-weight:600;">Вы бы поставили эти цифры в питч-дек?</p>
+  </section>
+
+  <!-- 7c ══ CHANGED: вывод -->
+  <section id="changed-takeaway">
+    <span class="eyebrow">Блок 1 · Что изменилось</span>
+    <h1>Где остаётся человек</h1>
+    <blockquote>
+      AI <strong>отлично генерирует</strong> убедительно выглядящие ответы.<br />
+      AI <strong>не знает</strong>, когда он врёт.<br />
+      <strong>Ваша задача</strong> — грамотно ставить задачу / проверять / устанавливать границы.
+    </blockquote>
+  </section>
+
+  <!-- 8a–b ══ CHANGED: что AI умеет / а что — нет (2 слайда) -->
+  <section id="ai-good-bad">
+    <span class="eyebrow">Блок 1 · Что изменилось · часть 1 из 2</span>
+    <h1>Что AI умеет</h1>
+    <p class="lead">Делает хорошо</p>
+    <div class="flag-grid flag-grid--quad">
+      <article class="flag-tile flag-tile--good">
+        <span class="flag-tile-num">+1</span>
+        <p>Структурирует расчёт по методологии</p>
+      </article>
+      <article class="flag-tile flag-tile--good">
+        <span class="flag-tile-num">+2</span>
+        <p>Быстро синтезирует публичные данные</p>
+      </article>
+      <article class="flag-tile flag-tile--good">
+        <span class="flag-tile-num">+3</span>
+        <p>Считает 3 сценария за 2 минуты</p>
+      </article>
+      <article class="flag-tile flag-tile--good">
+        <span class="flag-tile-num">+4</span>
+        <p>Генерирует adversarial критику себя</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="ai-good-bad-2">
+    <span class="eyebrow">Блок 1 · Что изменилось · часть 2 из 2</span>
+    <h1>…а что — нет</h1>
+    <p class="lead">Делает плохо</p>
+    <div class="flag-grid flag-grid--quad">
+      <article class="flag-tile">
+        <span class="flag-tile-num">−1</span>
+        <p>Придумывает ссылки (hallucination)</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">−2</span>
+        <p>Путает РФ-данные после 2022</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">−3</span>
+        <p>Не замечает устаревшие данные</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">−4</span>
+        <p>Убедительно округляет — 100 млрд, 50%</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 9 ══ FRAMING: введение -->
+  <section id="framing">
+    <span class="eyebrow">Блок 2 · Задача для AI</span>
+    <h1>Framing &gt; Prompting</h1>
+    <p class="lead">Не «напиши промпт», а «сформулируй задачу так, чтобы AI не мог уйти в сторону».</p>
+    <table>
+      <thead><tr><th>Плохой запрос</th><th>Хороший запрос</th></tr></thead>
+      <tbody>
+        <tr><td>«Оцени рынок доставки еды»</td><td>«Оцени рынок B2C доставки готовой еды в городах РФ 500+ тыс. чел., 2025–2026, метод bottom-up»</td></tr>
+        <tr><td>«Сколько клиентов?»</td><td>«Оцени кол-во ИП в РФ, использующих онлайн-бухгалтерию, на основе данных ФНС и открытых отчётов»</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10 ══ FRAMING: четыре правила -->
+  <section id="four-rules">
+    <span class="eyebrow">Блок 2 · Задача для AI</span>
+    <h1>Четыре правила постановки задачи</h1>
+    <div class="grid2">
+      <div class="card"><span class="tag tag-accent">1</span> <strong>Определи границы</strong><br /><span style="color:var(--brand-muted)">Продукт, сегмент, гео, период. Без этого AI считает мировой рынок всего.</span></div>
+      <div class="card"><span class="tag tag-accent">2</span> <strong>Укажи метод</strong><br /><span style="color:var(--brand-muted)">«Посчитай bottom-up: клиенты × чек × частота». AI следует инструкции, не угадывает.</span></div>
+      <div class="card"><span class="tag tag-accent">3</span> <strong>Потребуй источники</strong><br /><span style="color:var(--brand-muted)">«Каждую цифру: источник + год». Делает галлюцинации видимыми.</span></div>
+      <div class="card"><span class="tag tag-accent">4</span> <strong>Задай формат</strong><br /><span style="color:var(--brand-muted)">«Таблица TAM/SAM/SOM + допущения + источник». Убирает свободу трактовки.</span></div>
+    </div>
+  </section>
+
+  <!-- 11 ══ FRAMING: chain of thought -->
+  <section id="chain-of-thought">
+    <span class="eyebrow">Блок 2 · Задача для AI</span>
+    <h1>Chain of Thought для рынка</h1>
+    <p>Заставить AI <strong>сначала показать допущения</strong>, потом считать. Если допущение бредовое — вы видите его <strong>до</strong> финальной цифры.</p>
+    <pre>Прежде чем считать TAM, перечисли:
+1. Все ключевые допущения (минимум 5)
+2. Что ты НЕ знаешь точно и откуда берёшь данные
+3. Какой метод используешь и почему
+
+После этого — считай.</pre>
+  </section>
+
+  <!-- 12 ══ GUARDRAILS: заставка -->
+  <section id="guardrails">
+    <span class="eyebrow">Блок 3 · Guardrails</span>
+    <h1>Как не дать AI соврать</h1>
+    <p class="lead">5 инструментов верификации. Используйте все пять — не выбирайте один.</p>
+    <div class="grid2">
+      <div class="card"><span class="tag tag-accent">1</span> Sanity check через публичные компании</div>
+      <div class="card"><span class="tag tag-accent">2</span> Adversarial validation</div>
+      <div class="card"><span class="tag tag-accent">3</span> Order-of-magnitude check</div>
+      <div class="card"><span class="tag tag-accent">4</span> Проверка на устаревание</div>
+      <div class="card"><span class="tag tag-accent">5</span> Perplexity vs чистый LLM</div>
+    </div>
+  </section>
+
+  <!-- 13 ══ GUARDRAILS: инструмент 1 -->
+  <section id="sanity-check">
+    <span class="eyebrow">Блок 3 · Guardrails · Инструмент 1</span>
+    <h1>Sanity check: «Яндекс-тест»</h1>
+    <div class="card card-accent">
+      <p><strong>Рынок интернет-рекламы РФ.</strong> AI говорит: TAM = 1 трлн.</p>
+      <p>Яндекс — крупнейший игрок. Рекламная выручка 2024 = <strong>439 млрд</strong>, доля ≈ 60% → рынок ≈ <strong>730 млрд</strong>. AI завысил почти в 1,4×.</p>
+      <p style="font-size:0.82rem;color:var(--brand-muted);">Источник: отчёт Яндекса за 2024 год (опубликован февраль 2025)</p>
+    </div>
+    <p>Применимо к любому рынку с публичным игроком:</p>
+    <p><strong>Сбер, Ozon, Wildberries, HeadHunter, ЦИАН, VK, Fix Price, Яндекс</strong></p>
+  </section>
+
+  <!-- 14 ══ GUARDRAILS: инструмент 2 -->
+  <section id="adversarial">
+    <span class="eyebrow">Блок 3 · Guardrails · Инструмент 2</span>
+    <h1>Adversarial validation</h1>
+    <p>Новый чат. Новый контекст. Попросить AI раскритиковать первый расчёт:</p>
+    <pre>Вот анализ рынка: [вставить]
+
+Выступи в роли скептичного инвестора. Найди:
+1. Три главные ошибки или слабые допущения
+2. Цифры без источника / подозрительно круглые
+3. Что не учтено: конкуренция, регуляторика, пост-2022 изменения
+4. Как бы ты пересчитал?</pre>
+  </section>
+
+  <!-- 15 ══ GUARDRAILS: инструмент 3 -->
+  <section id="order-of-magnitude">
+    <span class="eyebrow">Блок 3 · Guardrails · Инструмент 3</span>
+    <h1>Order-of-magnitude check</h1>
+    <p class="lead">Здравый смысл без формулы. Ответьте вслух — без AI.</p>
+    <ul>
+      <li>SOM = 10 млрд при команде из 5 человек → реалистично?</li>
+      <li>Проникновение 40% за год в новом рынке → не слишком оптимистично?</li>
+      <li>«Рынок вырос в 3× за 2 года» → что произошло, или AI выдумал?</li>
+    </ul>
+  </section>
+
+  <!-- 16 ══ GUARDRAILS: инструмент 4 -->
+  <section id="staleness">
+    <span class="eyebrow">Блок 3 · Guardrails · Инструмент 4</span>
+    <h1>Проверка на устаревание</h1>
+    <p>РФ-рынки после 2022 изменились кардинально. Требуйте явно:</p>
+    <pre>Используй только данные за 2025–2026.
+Если данных за этот период нет — скажи явно.
+Не экстраполируй тренды из 2021–2022 для РФ-рынка.</pre>
+  </section>
+
+  <!-- 17 ══ GUARDRAILS: инструмент 5 -->
+  <section id="tools-comparison">
+    <span class="eyebrow">Блок 3 · Guardrails · Инструмент 5</span>
+    <h1>Perplexity vs чистый LLM</h1>
+    <table>
+      <thead><tr><th>Инструмент</th><th>Когда использовать</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Perplexity / ChatGPT Search</strong></td><td>Первичный поиск: цифры, ссылки, свежие данные</td></tr>
+        <tr><td><strong>Gemini Deep Research</strong></td><td>Глубокий синтез большого объёма источников</td></tr>
+        <tr><td><strong>Claude / GPT-4o</strong></td><td>Структурирование, расчёт, adversarial review</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 18a–c ══ GUARDRAILS: чеклист красных флагов (3 слайда, плитки) -->
+  <section id="red-flags">
+    <span class="eyebrow">Блок 3 · Guardrails · часть 1 из 3</span>
+    <h1>Чеклист «красных флагов»</h1>
+    <p class="lead">Если видите — остановитесь и перепроверьте вручную.</p>
+    <div class="flag-grid">
+      <article class="flag-tile">
+        <span class="flag-tile-num">01</span>
+        <p>Нет ссылок на источники <span class="flag-arrow">→</span> скорее всего выдумка</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">02</span>
+        <p>Все цифры «круглые» (100 млрд, 50%, 10 млн) <span class="flag-arrow">→</span> нет реальных данных</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">03</span>
+        <p>«По данным отраслевых исследований» без названия <span class="flag-arrow">→</span> классическая галлюцинация</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="red-flags-2">
+    <span class="eyebrow">Блок 3 · Guardrails · часть 2 из 3</span>
+    <h1>Красные флаги — продолжение</h1>
+    <div class="flag-grid">
+      <article class="flag-tile">
+        <span class="flag-tile-num">04</span>
+        <p>Описание рынка слишком общее <span class="flag-arrow">→</span> AI не нашёл конкретику</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">05</span>
+        <p>Нет диапазона / uncertainty <span class="flag-arrow">→</span> AI притворяется, что точно знает</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">06</span>
+        <p>Данные 2021–2022 для РФ-рынка <span class="flag-arrow">→</span> мир изменился</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="red-flags-3">
+    <span class="eyebrow">Блок 3 · Guardrails · часть 3 из 3</span>
+    <h1>Красные флаги — финал</h1>
+    <div class="flag-grid flag-grid--two">
+      <article class="flag-tile">
+        <span class="flag-tile-num">07</span>
+        <p>SOM &gt; 30% SAM с первого года <span class="flag-arrow">→</span> нереалистично</p>
+      </article>
+      <article class="flag-tile">
+        <span class="flag-tile-num">08</span>
+        <p>Ссылка на Statista / Grand View без реальной цитаты <span class="flag-arrow">→</span> AI не видел эти данные</p>
+      </article>
+    </div>
+    <p class="flag-footer-note">Раньше: искать вручную. Сейчас: AI агрегирует за секунды — ваша задача верифицировать.</p>
+  </section>
+
+  <!-- 19 ══ STRATEGY: основная мысль -->
+  <section id="strategy">
+    <span class="eyebrow">Блок 4 · Стратегический фильтр</span>
+    <h1>Попадание в стратегию</h1>
+    <p class="lead">«Вера в успех» из формулы — это стратегическое попадание. Теперь его тоже можно автоматизировать.</p>
+    <pre>Вот анализ рынка X: [вставить]
+Вот стратегические приоритеты компании: [из IR или внутреннего документа]
+
+Ответь:
+1. Три причины, почему этот рынок ПОДХОДИТ стратегии
+2. Три причины, почему НЕ подходит
+3. Какие активы уже есть для входа?
+4. Что нужно приобрести или построить?</pre>
+    <div class="card card-accent">
+      <strong>Решение — за человеком.</strong> AI даёт аргументы. Вы выбираете. Это правило не изменится.
+    </div>
+  </section>
+
+  <!-- 20 ══ STRATEGY: малый рынок -->
+  <section id="small-market">
+    <span class="eyebrow">Блок 4 · Стратегический фильтр</span>
+    <h1>Рынок мал, но идея нравится</h1>
+    <p class="lead">Вернуться к формуле. Посмотреть на активы и стратегическое попадание.</p>
+    <blockquote>
+      Иногда 5 млрд в правильном направлении важнее 50 млрд в чужом рынке.
+    </blockquote>
+  </section>
+
+  <!-- 21 ══ PRACTICE -->
+  <section id="practice">
+    <span class="eyebrow">Блок 5 · Практика</span>
+    <h1>Делаем прямо сейчас</h1>
+    <p class="lead">Возьмите продукт или идею из вашего проекта. 15 минут.</p>
+    <ol>
+      <li><strong>Сформулируй задачу</strong> по четырём правилам: границы, метод, источники, формат</li>
+      <li><strong>Запроси AI</strong> — Perplexity или ChatGPT с поиском</li>
+      <li><strong>Запусти adversarial review</strong> — попроси найти ошибки</li>
+      <li><strong>Проверь красные флаги</strong> по чеклисту</li>
+      <li><strong>Sanity check</strong> — найди публичную компанию в этом рынке</li>
+    </ol>
+    <p class="lead" style="margin-top:1rem;">Файлы для работы после лекции — на слайде <a href="#cheat-sheet">«Шпаргалка»</a> в конце дека.</p>
+  </section>
+
+  <!-- 22a–b ══ RECAP Do, затем Don't (2 слайда) -->
+  <section id="recap">
+    <span class="eyebrow">Блок 6 · Recap · часть 1 из 2</span>
+    <h1>Do</h1>
+    <div class="do-stack">
+      <div class="do-tile do-tile--yes"><span class="do-tile-label">Do</span>Определи границы до запроса</div>
+      <div class="do-tile do-tile--yes"><span class="do-tile-label">Do</span>Потребуй источники с годом</div>
+      <div class="do-tile do-tile--yes"><span class="do-tile-label">Do</span>Chain of Thought — допущения сначала</div>
+      <div class="do-tile do-tile--yes"><span class="do-tile-label">Do</span>Adversarial review (второй проход)</div>
+      <div class="do-tile do-tile--yes"><span class="do-tile-label">Do</span>Sanity check через публичную компанию</div>
+      <div class="do-tile do-tile--yes"><span class="do-tile-label">Do</span>Три метода — AI считает все три за 2 мин</div>
+      <div class="do-tile do-tile--yes"><span class="do-tile-label">Do</span>Явно задавать горизонт данных (2025–2026)</div>
+    </div>
+  </section>
+
+  <section id="recap-2">
+    <span class="eyebrow">Блок 6 · Recap · часть 2 из 2</span>
+    <h1>Don't</h1>
+    <div class="do-stack">
+      <div class="do-tile do-tile--no"><span class="do-tile-label">Don't</span>«Оцени мне рынок» без контекста</div>
+      <div class="do-tile do-tile--no"><span class="do-tile-label">Don't</span>Верить круглым цифрам без ссылок</div>
+      <div class="do-tile do-tile--no"><span class="do-tile-label">Don't</span>Один промпт → один ответ → «готово»</div>
+      <div class="do-tile do-tile--no"><span class="do-tile-label">Don't</span>Копировать первый ответ в питч-дек</div>
+      <div class="do-tile do-tile--no"><span class="do-tile-label">Don't</span>Игнорировать здравый смысл</div>
+      <div class="do-tile do-tile--no"><span class="do-tile-label">Don't</span>Доверять одному методу</div>
+      <div class="do-tile do-tile--no"><span class="do-tile-label">Don't</span>Забывать, что РФ-рынки изменились</div>
+    </div>
+  </section>
+
+  <!-- 23 ══ Шпаргалка (файлы рядом с декой) -->
+  <section id="cheat-sheet">
+    <span class="eyebrow">После лекции</span>
+    <h1>Шпаргалка</h1>
+    <p class="lead">Заберите в работу: workflow, промпты, guardrails — как в материалах курса.</p>
+    <div class="card card-accent">
+      <strong>Skill для AI-агента</strong>
+      <p style="margin-top:0.5rem;">Пошаговый сценарий, шаблоны запросов, валидация и формат отчёта. Положи рядом с проектом или подключи как Cursor skill.</p>
+      <p style="margin-top:0.65rem;"><a href="../../market-analysis-skill.md"><code>market-analysis-skill.md</code></a></p>
+    </div>
+    <div class="card card-success">
+      <strong>Чеклист для себя</strong>
+      <p style="margin-top:0.5rem;">Фрейминг, красные флаги, порядок величин — то, что проверяешь ты, а не модель.</p>
+      <p style="margin-top:0.65rem;"><a href="../../market-analysis-checklist.md"><code>market-analysis-checklist.md</code></a></p>
+    </div>
+    <div class="footer-strip">
+      Максим Калюжный · TG @max_kalyuzhnyi · +351 93 783 8051
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section'));
+  var bar = document.getElementById('progressBar');
+  var navLinks = document.querySelectorAll('.toolbar-nav a');
+  var idx = 0;
+
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+
+  function scrollToIdx(i) {
+    i = clamp(i, 0, sections.length - 1);
+    idx = i;
+    sections[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function updateNav() {
+    var mid = window.scrollY + window.innerHeight * 0.3;
+    var best = 0, bestD = Infinity;
+    for (var j = 0; j < sections.length; j++) {
+      var top = sections[j].getBoundingClientRect().top + window.scrollY;
+      var d = Math.abs(top - mid);
+      if (d < bestD) { bestD = d; best = j; }
+    }
+    idx = best;
+    bar.style.width = ((best + 1) / sections.length * 100) + '%';
+    var activeId = sections[best].id;
+    navLinks.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + activeId);
+    });
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+
+  window.addEventListener('keydown', function (e) {
+    if (e.target && /input|textarea/i.test(e.target.tagName)) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+      e.preventDefault(); scrollToIdx(idx + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault(); scrollToIdx(idx - 1);
+    }
+  });
+
+  updateNav();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+{
+  "$schema": "./brand.schema.json",
+  "meta": {
+    "name": "Maksim Kalyuzhnyi — speaking decks",
+    "version": "1.0.0",
+    "notes": "Base tokens are personal brand; clients only override accent + logo. Semantic colors stay fixed."
+  },
+  "base": {
+    "font_family": "Gilroy",
+    "font_path": "Gilroy/",
+    "font_files": {
+      "light": "Gilroy-Light.otf",
+      "regular": "Gilroy-Regular.otf",
+      "medium": "Gilroy-Medium.otf",
+      "semibold": "Gilroy-Semibold.otf",
+      "bold": "Gilroy-Bold.otf",
+      "extrabold": "Gilroy-Extrabold.otf"
+    },
+    "bg": "#ffffff",
+    "text": "#1a1f16",
+    "accent": "#1a2744",
+    "muted": "#6b7280",
+    "border": "#e2e8df",
+    "semantic": {
+      "danger": "#d94040",
+      "success": "#0d8a3e",
+      "warning": "#e5a000"
+    },
+    "heading": {
+      "transform": "uppercase",
+      "weight": "Bold"
+    },
+    "subheading": {
+      "transform": "none",
+      "weight": "Semibold"
+    },
+    "whitespace": "generous",
+    "imagery": "mix_screenshots_and_ai"
+  },
+  "clients": {
+    "sber": {
+      "label": "Сбер",
+      "accent": "#0d8a3e",
+      "logo": "clients/sber-logo.svg"
+    },
+    "vtb": {
+      "label": "ВТБ",
+      "accent": "#003087",
+      "logo": "clients/vtb-logo.svg"
+    },
+    "skolkovo": {
+      "label": "Сколково",
+      "accent": "#e31e24",
+      "logo": "clients/skolkovo-logo.svg"
+    },
+    "default": {
+      "label": "Personal (no client)",
+      "accent": "#1a2744",
+      "logo": null
+    }
+  }
+}

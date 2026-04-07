@@ -1,0 +1,7 @@
+{
+  "_comment": "Merge into .vscode/settings.json in this workspace (or Cursor user settings) to auto-save pasted images next to each .md file.",
+  "markdown.copyFiles.destination": {
+    "**/*.md": "${documentDir}/lecture_assets/${fileName}"
+  },
+  "markdown.copyFiles.overwriteBehavior": "nameIncrementally"
+}
