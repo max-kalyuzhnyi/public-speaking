@@ -80,7 +80,7 @@
 Сравни с нашим расчётом TAM.
 ```
 
-Для РФ: Сбер, Ozon, Wildberries, HeadHunter, ЦИАН, VK, Яндекс, Fix Price, Магнит и др.
+Для РФ: Сбер, Ozon, Wildberries, МТС, ВымпелКом (Билайн), HeadHunter, ЦИАН, VK, Fix Price, Магнит и др.
 
 ### B. Проверка порядка величины
 
