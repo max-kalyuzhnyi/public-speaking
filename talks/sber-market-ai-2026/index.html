@@ -266,6 +266,36 @@
       margin-top: 0.45rem;
     }
 
+    /* ─── Practice iterations: two-column layout ─── */
+    .iter-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 1.5rem 2rem;
+      align-items: start;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .iter-grid .iter-stage h2 {
+      margin-top: 0;
+      font-size: 1.05rem;
+    }
+
+    .iter-grid .iter-stage ul {
+      margin: 0.5rem 0 0;
+    }
+
+    .iter-grid pre {
+      margin: 0;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 800px) {
+      .iter-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ─── Checklist ─── */
     .checklist {
       list-style: none;
@@ -575,6 +605,8 @@
     <li><a href="#framing">Задача</a></li>
     <li><a href="#guardrails">Guardrails</a></li>
     <li><a href="#strategy">Стратегия</a></li>
+    <li><a href="#quality-rubric">Качество</a></li>
+    <li><a href="#ecosystem-daisy">Экосистема</a></li>
     <li><a href="#practice">Практика</a></li>
     <li><a href="#recap">Recap</a></li>
     <li><a href="#cheat-sheet">Шпаргалка</a></li>
@@ -993,19 +1025,126 @@
     </blockquote>
   </section>
 
-  <!-- 21 ══ PRACTICE -->
+  <!-- 20b ══ QUALITY RUBRIC -->
+  <section id="quality-rubric">
+    <span class="eyebrow">Блок 4b · Качество анализа</span>
+    <h1>Внутренние критерии и рубрика 0–10</h1>
+    <p class="lead">Перед тем как верить цифрам в отчёте — четыре обязательные проверки.</p>
+    <ul>
+      <li><strong>TAM / SAM / SOM</strong> заданы явно и согласованы с расчётом (не «голые» числа).</li>
+      <li><strong>Воронка SAM</strong> очищена от нецелевых сегментов и каналов.</li>
+      <li><strong>SOM</strong> согласован с конкурентами и реалистичной долей, а не «желаемым» процентом.</li>
+      <li><strong>Горизонт выхода на целевой SOM</strong> обоснован (команда, канал, инвестиции), а не произвольный год.</li>
+    </ul>
+    <h3>Полнота и качество (сумма = X / 10)</h3>
+    <table>
+      <thead><tr><th>Критерий</th><th>Баллы</th><th>О чём судим</th></tr></thead>
+      <tbody>
+        <tr><td><strong>a</strong></td><td>0–3</td><td>Прозрачность и согласованность TAM/SAM/SOM с методом и допущениями.</td></tr>
+        <tr><td><strong>b</strong></td><td>0–3</td><td>Качество сегментации SAM: кого исключили из воронки и почему.</td></tr>
+        <tr><td><strong>c</strong></td><td>0–3</td><td>Учёт конкурентов и альтернатив при оценке SOM.</td></tr>
+        <tr><td><strong>d</strong></td><td>0–1</td><td>Обоснованность срока достижения заявленного SOM.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Итого:</strong> a + b + c + d = <strong>X / 10</strong> — в skill агент выводит эту таблицу после основного отчёта.</p>
+  </section>
+
+  <!-- 20c ══ ECOSYSTEM DAISY -->
+  <section id="ecosystem-daisy">
+    <span class="eyebrow">Блок 4c · Экосистема</span>
+    <h1>Портфель сфер жизни («ромашка»)</h1>
+    <p class="lead">Раздатка в Markdown — для <strong>product discovery</strong>: прогоните свой продукт по схеме, найдите лепесток, где логична точка входа, кто может быть <strong>ЛПР</strong>, с кем стоит поговорить в B2B-цепочке.</p>
+    <p><a href="handouts/sber-ecosystem-life-spheres.md"><code>handouts/sber-ecosystem-life-spheres.md</code></a></p>
+    <figure class="slide-figure">
+      <img src="lecture_assets/sber-ecosystem-daisy.png" alt="Портфель сфер жизни — схема экосистемы" width="1200" height="800" loading="lazy" decoding="async" />
+      <figcaption>Схема макро-экосистем и ролей; подробности и вопросы для discovery — в раздатке.</figcaption>
+    </figure>
+  </section>
+
+  <!-- 21 ══ PRACTICE: вводный + 4 итерации промпта -->
   <section id="practice">
-    <span class="eyebrow">Блок 5 · Практика</span>
-    <h1>Делаем прямо сейчас</h1>
-    <p class="lead">Возьмите продукт или идею из вашего проекта. 15 минут.</p>
-    <ol>
-      <li><strong>Сформулируй задачу</strong> по четырём правилам: границы, метод, источники, формат</li>
-      <li><strong>Запроси AI</strong> — Perplexity или ChatGPT с поиском</li>
-      <li><strong>Запусти adversarial review</strong> — попроси найти ошибки</li>
-      <li><strong>Проверь красные флаги</strong> по чеклисту</li>
-      <li><strong>Sanity check</strong> — найди публичную компанию в этом рынке</li>
-    </ol>
-    <p class="lead" style="margin-top:1rem;">Файлы для работы после лекции — на слайде <a href="#cheat-sheet">«Шпаргалка»</a> в конце дека.</p>
+    <span class="eyebrow">Блок 5 · Практика · ввод</span>
+    <h1>Один продукт, один рынок</h1>
+    <p class="lead">Дальше — четыре слайда: как усложняется промпт от «на отмашку» до почти полного skill. Листайте стрелками.</p>
+    <p class="lead" style="margin-top:0.75rem;">Файлы после лекции — <a href="#cheat-sheet">шпаргалка</a> и <a href="handouts/sber-ecosystem-life-spheres.md">раздатка экосистемы</a>.</p>
+  </section>
+
+  <section id="practice-1">
+    <span class="eyebrow">Блок 5 · Практика · итерация 1 из 4</span>
+    <h1>Минимальный запрос</h1>
+    <div class="iter-grid">
+      <div class="iter-stage">
+        <h2>Что на этой стадии</h2>
+        <ul>
+          <li>Нет границ рынка и метода — модель «размазывает» ответ.</li>
+          <li>Полезно как демо галлюцинаций, не как вход в решение.</li>
+        </ul>
+      </div>
+      <div>
+        <pre>Оцени рынок онлайн-бухгалтерии для ИП в России.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice-2">
+    <span class="eyebrow">Блок 5 · Практика · итерация 2 из 4</span>
+    <h1>+ Метод и воронка</h1>
+    <div class="iter-grid">
+      <div class="iter-stage">
+        <h2>Что добавили</h2>
+        <ul>
+          <li>Явные TAM / SAM / SOM, география, период.</li>
+          <li>Метод: bottom-up или top-down — чтобы AI не выбрал «по умолчанию».</li>
+        </ul>
+      </div>
+      <div>
+        <pre>Оцени рынок онлайн-бухгалтерии для ИП в РФ.
+География: РФ, города 100+ тыс. жителей.
+Период: 2025–2026.
+Метод: bottom-up (число ИП × доля онлайн × ARPU).
+Верни таблицу TAM, SAM, SOM с допущениями по строкам.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice-3">
+    <span class="eyebrow">Блок 5 · Практика · итерация 3 из 4</span>
+    <h1>+ Источники и проверка</h1>
+    <div class="iter-grid">
+      <div class="iter-stage">
+        <h2>Что добавили</h2>
+        <ul>
+          <li>Chain of Thought: допущения до цифр.</li>
+          <li>Источник + год; таблица; явные красные флаги.</li>
+        </ul>
+      </div>
+      <div>
+        <pre>Прежде чем считать TAM/SAM/SOM, перечисли минимум 5 допущений и неизвестные.
+Затем посчитай bottom-up для РФ, 2025–2026.
+Каждую цифру сопроводи источником и годом.
+В конце — список красных флагов по чеклисту из лекции.</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice-4">
+    <span class="eyebrow">Блок 5 · Практика · итерация 4 из 4</span>
+    <h1>+ Конкуренты и оценка по рубрике</h1>
+    <div class="iter-grid">
+      <div class="iter-stage">
+        <h2>Что добавили</h2>
+        <ul>
+          <li>Конкуренты и альтернативы; второй проход — adversarial review.</li>
+          <li>Просьба выставить баллы <strong>a–d</strong> и итог <strong>X / 10</strong> (как на слайде «Качество»).</li>
+        </ul>
+      </div>
+      <div>
+        <pre>После расчёта назови 3–5 ключевых игроков и их влияние на реалистичный SOM.
+Запусти adversarial review своего же ответа (новый чат).
+В конце выведи таблицу оценки по рубрике a–d с комментариями и суммой X/10.</pre>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:1.25rem;">Дальше — самостоятельно: возьмите свой продукт, пройдите шаги из итерации 4, затем проверьте отчёт по <a href="#quality-rubric">рубрике</a> и чеклисту на слайде <a href="#cheat-sheet">«Шпаргалка»</a>.</p>
   </section>
 
   <!-- 22a–b ══ RECAP Do, затем Don't (2 слайда) -->
@@ -1044,8 +1183,13 @@
     <p class="lead">Заберите в работу: workflow, промпты, guardrails — как в материалах курса.</p>
     <div class="card card-accent">
       <strong>Skill для AI-агента</strong>
-      <p style="margin-top:0.5rem;">Пошаговый сценарий, шаблоны запросов, валидация и формат отчёта. Положи рядом с проектом или подключи как Cursor skill.</p>
+      <p style="margin-top:0.5rem;">Пошаговый сценарий, шаблоны запросов, валидация, рубрика 0–10 и формат отчёта на русском. Положи рядом с проектом или подключи как Cursor skill.</p>
       <p style="margin-top:0.65rem;"><a href="../../market-analysis-skill.md"><code>market-analysis-skill.md</code></a></p>
+    </div>
+    <div class="card">
+      <strong>Экосистема Сбера («ромашка»)</strong>
+      <p style="margin-top:0.5rem;">Текстовая раздатка для product discovery: куда вписывается продукт, ЛПР, с кем говорить.</p>
+      <p style="margin-top:0.65rem;"><a href="handouts/sber-ecosystem-life-spheres.md"><code>handouts/sber-ecosystem-life-spheres.md</code></a></p>
     </div>
     <div class="card card-success">
       <strong>Чеклист для себя</strong>

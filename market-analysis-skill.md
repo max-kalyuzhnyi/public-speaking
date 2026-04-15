@@ -1,27 +1,29 @@
-# SKILL: AI Market Analysis
+# SKILL: AI-анализ рынка (TAM / SAM / SOM)
 
-**Trigger:** User asks to estimate TAM/SAM/SOM, validate a market analysis, or assess market fit for a pitch or strategy.
+**Триггер:** пользователь просит оценить TAM/SAM/SOM, проверить анализ рынка или оценить рыночное попадание для питча или стратегии.
 
----
-
-## Step 1 — Collect framing from the user
-
-Before any calculation, ask the user to confirm all of the following. Do not proceed until all are answered:
-
-- Product / service
-- Target customer segment
-- Geography
-- Time horizon (year / period)
-- Calculation method: top-down / bottom-up / value theory / all three
-- Goal: pitch / strategy / go-no-go decision
-
-If any field is missing, ask for it explicitly. Do not fill gaps with assumptions.
+**Язык:** все инструкции ниже и **весь итоговый отчёт** выводи **на русском**.
 
 ---
 
-## Step 2 — Run the market sizing prompt (Chain of Thought)
+## Шаг 1 — Собрать фрейминг у пользователя
 
-Use a web-search-enabled tool (Perplexity, ChatGPT Search, Gemini) — not raw LLM for finding numbers. Send:
+Прежде чем считать что-либо, попроси подтвердить **все** пункты ниже. Не переходи к расчётам, пока нет ответов:
+
+- Продукт / услуга
+- Целевой сегмент клиентов
+- География
+- Горизонт (год / период)
+- Метод расчёта: top-down / bottom-up / value theory / все три
+- Цель: питч / стратегия / решение go / no-go
+
+Если чего-то не хватает — запроси явно. Не заполняй пробелы за пользователя домыслами.
+
+---
+
+## Шаг 2 — Запрос на оценку рынка (Chain of Thought)
+
+Используй инструмент с веб-поиском (Perplexity, ChatGPT Search, Gemini) — **не** сырой LLM без доступа к актуальным данным. Отправь:
 
 ```
 Оцени рынок для: [продукт/сервис]
@@ -48,9 +50,9 @@ Use a web-search-enabled tool (Perplexity, ChatGPT Search, Gemini) — not raw L
 
 ---
 
-## Step 3 — Run adversarial review
+## Шаг 3 — Adversarial review
 
-Open a fresh context and send:
+Открой **новый** контекст и отправь:
 
 ```
 Вот анализ рынка:
@@ -65,38 +67,38 @@ Open a fresh context and send:
 
 ---
 
-## Step 4 — Run sanity checks
+## Шаг 4 — Sanity checks
 
-### A. Public company benchmark
+### A. Ориентир на публичную компанию
 
-Find a public company operating in this market with reported revenue. Send:
+Найди публичную компанию в этом рынке с раскрытой выручкой. Отправь:
 
 ```
 [Компания X] работает в этом рынке и показывает выручку = Y млрд/год.
-По аналитике, её доля рынка = Z%.
-Значит, рынок ≈ Y / Z * 100.
+По оценке, её доля рынка = Z%.
+Значит, рынок ≈ Y / Z × 100.
 Сравни с нашим расчётом TAM.
 ```
 
-For Russian market: Сбер, Ozon, Wildberries, HeadHunter, ЦИАН, VK, Яндекс, Fix Price, Магнит.
+Для РФ: Сбер, Ozon, Wildberries, HeadHunter, ЦИАН, VK, Яндекс, Fix Price, Магнит и др.
 
-### B. Order-of-magnitude check
+### B. Проверка порядка величины
 
-Do NOT answer these yourself. Ask the user to answer manually:
+**Не** отвечай на вопросы ниже сам — попроси ответить пользователя вручную:
 
-- "SOM реален при вашем размере команды и горизонте?"
-- "Проникновение реалистично? (≤30% в год для нового рынка — уже агрессивно)"
-- "Темп роста рынка объяснён реальным событием или AI просто экстраполировал?"
+- «SOM реалистичен при вашем размере команды и горизонте?»
+- «Проникновение реалистично? (≤30% в год для нового рынка — уже агрессивно)»
+- «Темп роста рынка объяснён реальным событием или модель просто экстраполировала?»
 
-### C. Data freshness check
+### C. Актуальность данных
 
-Verify all sources are from 2025–2026. If any source is from 2021–2022 for the Russian market, flag it explicitly before continuing.
+Проверь, что опоры — **2025–2026**. Если для рынка РФ встречаются данные 2021–2022 — явно пометь это как риск до продолжения.
 
 ---
 
-## Step 5 — Strategic filter
+## Шаг 5 — Стратегический фильтр
 
-Ask the user to provide their company's strategic priorities, then send:
+Попроси пользователя сформулировать стратегические приоритеты компании, затем отправь:
 
 ```
 Вот анализ рынка: [вставить]
@@ -109,29 +111,29 @@ Ask the user to provide their company's strategic priorities, then send:
 4. Что нужно приобрести или построить?
 ```
 
-Do not make a go/no-go recommendation. Return arguments only — the user decides.
+Не выдавай рекомендацию go/no-go — только аргументы; решение за пользователем.
 
 ---
 
-## Step 6 — Auto-validate before presenting results
+## Шаг 6 — Автопроверка перед выдачей
 
-Check each item below. If triggered, flag it and ask the user to verify manually before finalizing:
+Проверь пункты ниже. Если сработало — пометь и при необходимости попроси пользователя перепроверить вручную:
 
-- No source citations → likely hallucinated
-- All numbers are round (100B, 50%, 10M) → no real data found
-- "По данным отраслевых исследований" with no name → hallucination marker
-- No specific competitors or players named → AI didn't find real data
-- No uncertainty range → AI is faking precision
-- Data from 2021–2022 for Russian market → post-sanctions world changed significantly
-- SOM > 30% of SAM in year 1 → almost never realistic
-- "Market grew 3× in one year" without explanation → extrapolation, not sourced data
-- Citation to Statista / Grand View / MarketsandMarkets → AI cannot access paywalled data; numbers are fabricated
+- Нет ссылок на источники → вероятная галлюцинация
+- Все числа «круглые» (100 млрд, 50%, 10 млн) → данных не нашли
+- «По данным отраслевых исследований» без названия → маркер галлюцинации
+- Нет конкурентов / игроков → модель не нашла реальные данные
+- Нет диапазона неопределённости → притворная точность
+- Данные 2021–2022 для РФ без оговорок → контекст сильно изменился
+- SOM > 30% SAM в первый год → почти нереалистично
+- «Рынок вырос в 3 раза за год» без объяснения → экстраполяция
+- Цитата Statista / Grand View / MarketsandMarkets без реальной выжимки → платный отчёт модель не видела
 
 ---
 
-## Step 7 — Generate final report
+## Шаг 7 — Итоговый отчёт (основной блок)
 
-Output in this exact format:
+Выведи **строго** в таком формате:
 
 ```markdown
 ## Оценка рынка: [название]
@@ -168,15 +170,54 @@ Output in this exact format:
 
 ---
 
-## Tool selection
+## Шаг 8 — Оценка по внутренней рубрике (после основного отчёта)
 
+**Сразу после** блока шага 7 выполни:
 
-| Task                      | Tool                                               |
-| ------------------------- | -------------------------------------------------- |
-| Finding market numbers    | Perplexity or ChatGPT Search (web access required) |
-| Deep synthesis            | Gemini Deep Research                               |
-| Structuring / calculation | Claude, GPT-4o                                     |
-| Adversarial review        | Claude (fresh context)                             |
-| Russian market specifics  | Perplexity in Russian                              |
+1. **Четыре обязательные проверки** (да/нет + одна фраза по каждой):
+   - TAM/SAM/SOM заданы явно и согласованы с расчётом
+   - Воронка SAM очищена от нецелевых сегментов/каналов
+   - SOM согласован с конкурентами и реалистичной долей
+   - Горизонт выхода на целевой SOM обоснован (не произвольный год)
 
+2. **Баллы по критериям a–d** с кратким комментарием:
+   - **a (0–3):** прозрачность и согласованность TAM/SAM/SOM с методом и допущениями
+   - **b (0–3):** качество сегментации SAM (кого исключили из воронки и почему)
+   - **c (0–3):** учёт конкурентов и альтернатив при оценке SOM
+   - **d (0–1):** обоснованность срока достижения заявленного SOM
 
+3. Выведи таблицу:
+
+```markdown
+### Обязательные проверки
+| Проверка | OK | Комментарий |
+|----------|----|--------------|
+| TAM/SAM/SOM и расчёт | да/нет | ... |
+| Очистка SAM от нецелевых | да/нет | ... |
+| SOM и конкуренты | да/нет | ... |
+| Горизонт SOM обоснован | да/нет | ... |
+
+### Оценка по рубрике (0–10)
+| Критерий | Баллы | Комментарий |
+|----------|-------|-------------|
+| a — TAM/SAM/SOM и метод | 0–3 | ... |
+| b — сегментация SAM | 0–3 | ... |
+| c — конкуренты и SOM | 0–3 | ... |
+| d — горизонт SOM | 0–1 | ... |
+
+**Итого: X / 10**
+```
+
+Сумма a + b + c + d должна равняться **X**.
+
+---
+
+## Выбор инструментов
+
+| Задача | Инструмент |
+|--------|------------|
+| Поиск рыночных цифр | Perplexity или ChatGPT Search (нужен веб) |
+| Глубокий синтез | Gemini Deep Research |
+| Структура / расчёт | Claude, GPT-4o |
+| Adversarial review | Claude (новый контекст) |
+| Специфика РФ | Perplexity на русском |
