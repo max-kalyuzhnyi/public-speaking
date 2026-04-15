@@ -218,6 +218,6 @@
 |--------|------------|
 | Поиск рыночных цифр | Perplexity или ChatGPT Search (нужен веб) |
 | Глубокий синтез | Gemini Deep Research |
-| Структура / расчёт | Claude, GPT-4o |
+| Структура / расчёт | Claude, GPT 5.4 |
 | Adversarial review | Claude (новый контекст) |
 | Специфика РФ | Perplexity на русском |

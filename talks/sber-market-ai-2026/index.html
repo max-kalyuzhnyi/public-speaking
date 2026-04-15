@@ -188,6 +188,38 @@
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
 
+    /* Four rules: fixed 2×2, larger “cubes” */
+    .four-rules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.35rem 1.5rem;
+      margin-top: 1.25rem;
+      width: 100%;
+    }
+
+    .four-rules-grid .card {
+      padding: 1.6rem 1.65rem;
+      min-height: 11.5rem;
+      font-size: 1.02rem;
+      line-height: 1.5;
+    }
+
+    .four-rules-grid .card .tag {
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .four-rules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .four-rules-grid .card {
+        min-height: auto;
+      }
+    }
+
     /* ─── Tag / badge ─── */
     .tag {
       display: inline-block;
@@ -610,7 +642,7 @@
     <li><a href="#practice">Практика</a></li>
     <li><a href="#recap">Recap</a></li>
     <li><a href="#cheat-sheet">Шпаргалка</a></li>
-    <li><a href="#thanks">Конец</a></li>
+    <li><a href="#thanks">Контакты</a></li>
   </ul>
   <div class="progress" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
   <span class="toolbar-hint">← → листать</span>
@@ -760,7 +792,7 @@
   <!-- 7b ══ CHANGED: демо -->
   <section id="changed-demo">
     <span class="eyebrow">Блок 1 · Что изменилось</span>
-    <h1>Демо</h1>
+    <h1>Что не так?</h1>
     <p class="lead">Просим AI оценить рынок — например, онлайн-сервисы для ИП в РФ в 2026.</p>
     <div class="card card-accent">
       <p style="margin:0;">Типичный ответ: TAM = 150 млрд, SAM = 40 млрд, SOM = 5–12 млрд.</p>
@@ -846,7 +878,7 @@
   <section id="four-rules">
     <span class="eyebrow">Блок 2 · Задача для AI</span>
     <h1>Четыре правила постановки задачи</h1>
-    <div class="grid2">
+    <div class="four-rules-grid">
       <div class="card"><span class="tag tag-accent">1</span> <strong>Определи границы</strong><br /><span style="color:var(--brand-muted)">Продукт, сегмент, гео, период. Без этого AI считает мировой рынок всего.</span></div>
       <div class="card"><span class="tag tag-accent">2</span> <strong>Укажи метод</strong><br /><span style="color:var(--brand-muted)">«Посчитай bottom-up: клиенты × чек × частота». AI следует инструкции, не угадывает.</span></div>
       <div class="card"><span class="tag tag-accent">3</span> <strong>Потребуй источники</strong><br /><span style="color:var(--brand-muted)">«Каждую цифру: источник + год». Делает галлюцинации видимыми.</span></div>
@@ -877,7 +909,7 @@
       <div class="card"><span class="tag tag-accent">2</span> Adversarial validation</div>
       <div class="card"><span class="tag tag-accent">3</span> Order-of-magnitude check</div>
       <div class="card"><span class="tag tag-accent">4</span> Проверка на устаревание</div>
-      <div class="card"><span class="tag tag-accent">5</span> Perplexity vs чистый LLM</div>
+      <div class="card"><span class="tag tag-accent">5</span> Агент vs LLM</div>
     </div>
   </section>
 
@@ -934,13 +966,13 @@
   <!-- 17 ══ GUARDRAILS: инструмент 5 -->
   <section id="tools-comparison">
     <span class="eyebrow">Блок 3 · Guardrails · Инструмент 5</span>
-    <h1>Perplexity vs чистый LLM</h1>
+    <h1>Агент vs LLM</h1>
     <table>
       <thead><tr><th>Инструмент</th><th>Когда использовать</th></tr></thead>
       <tbody>
-        <tr><td><strong>Perplexity / ChatGPT Search</strong></td><td>Первичный поиск: цифры, ссылки, свежие данные</td></tr>
+        <tr><td><strong>Агент с поиском</strong> (Perplexity, ChatGPT Search)</td><td>Первичный поиск: цифры, ссылки, свежие данные</td></tr>
         <tr><td><strong>Gemini Deep Research</strong></td><td>Глубокий синтез большого объёма источников</td></tr>
-        <tr><td><strong>Claude / GPT-4o</strong></td><td>Структурирование, расчёт, adversarial review</td></tr>
+        <tr><td><strong>Claude / GPT 5.4</strong></td><td>Структурирование, расчёт, adversarial review</td></tr>
       </tbody>
     </table>
   </section>
@@ -1004,10 +1036,11 @@
   <!-- 19 ══ STRATEGY: стратегия Сбера (ссылка + приоритеты) -->
   <section id="strategy">
     <span class="eyebrow">Блок 4 · Стратегический фильтр · часть 1 из 2</span>
-    <h1>Стратегия Сбера — ориентир</h1>
-    <p class="lead">Когда оцениваете рынок внутри Группы, сверяйтесь с публичной логикой экосистемы и приоритетами (не с «мировым TAM всего»).</p>
-    <p><a href="https://www.sberbank.ru/ru/sberpress/all/article?newsID=110dee0f-baa8-44f9-a08a-b84e372b8400&amp;blockID=1303&amp;regionID=78&amp;lang=ru&amp;type=NEWS" rel="noopener noreferrer">Материал Сбера на sberbank.ru — стратегия развития экосистемы</a></p>
-    <p>Основные акценты (по смыслу стратегии экосистемы; детали — в материале по ссылке):</p>
+    <h1>Ориентир — внутренняя стратегия</h1>
+    <p class="lead">Когда оцениваете рынок внутри Группы, сверяйтесь с приоритетами / преимуществами / ограничениями экосистемы (не с «мировым TAM всего»).</p>
+    <p>Ссылка: <a href="https://investor.sberbank.ru/" rel="noopener noreferrer">Публичная презентация стратегии до 2026 года</a></p>
+    <p><strong>Ключевое слово:</strong> Человекоцентричность</p>
+    <p><strong>Основные акценты:</strong></p>
     <ul>
       <li><strong>Жизненные сценарии клиента</strong> — не набор разрозненных продуктов, а связанные сервисы вокруг повседневных задач (в т.ч. пространства вроде «Для жизни», мини-экосистемы «Дом», «Авто», «Семья и безопасность»).</li>
       <li><strong>Глубина и частота</strong> — проникновение продуктов, удовлетворённость, NPS, <strong>SLTV</strong> как опора долгосрочной модели.</li>
@@ -1219,7 +1252,7 @@
 
   <!-- ══ THANKS -->
   <section id="thanks">
-    <span class="eyebrow">Конец</span>
+    <span class="eyebrow">Контакты</span>
     <h1>Спасибо за внимание</h1>
     <p class="lead" style="font-size:1.35rem;margin-top:2rem;line-height:1.5;">
       Максим Калюжный · TG @max_kalyuzhnyi · +351 93 783 8051
