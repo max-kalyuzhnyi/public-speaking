@@ -478,11 +478,24 @@
 
     @media (min-width: 900px) {
       .flag-grid { grid-template-columns: repeat(3, 1fr); }
-      .flag-grid--two { grid-template-columns: repeat(2, 1fr); }
+      .flag-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 899px) {
       .flag-grid--two { grid-template-columns: 1fr; }
+    }
+
+    /* Two tiles in one row: equal width/height, aligned tops (no uneven gray gaps in PDF) */
+    .flag-grid--two {
+      align-items: stretch;
+      justify-items: stretch;
+    }
+
+    .flag-grid--two .flag-tile {
+      justify-content: flex-start;
+      min-height: 10.5rem;
+      height: auto;
+      align-self: stretch;
     }
 
     /* 2×2 grid for four tiles */
@@ -618,11 +631,185 @@
       display: none;
     }
 
-    /* ─── Print ─── */
+    /* ─── Print: one section = one 16:9 slide (PDF / «Печать в PDF») ─── */
     @media print {
-      .toolbar { position: static; }
-      main { padding-top: 0; }
-      section { min-height: auto; page-break-inside: avoid; }
+      @page {
+        /* 1920×1080-style slide aspect ratio */
+        size: 10in 5.625in;
+        margin: 0;
+      }
+
+      * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #fff !important;
+      }
+
+      .toolbar {
+        display: none !important;
+      }
+
+      main {
+        padding-top: 0 !important;
+        max-width: none !important;
+      }
+
+      /* Exactly one printed page per <section> (each «screen» in the deck) */
+      section {
+        box-sizing: border-box;
+        width: 10in;
+        height: 5.625in;
+        min-height: 5.625in;
+        max-height: 5.625in;
+        max-width: none !important;
+        margin: 0 auto;
+        padding: 0.45in 0.55in 0.5in;
+        background: #fff !important;
+        border: none !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+        break-after: page;
+        break-inside: avoid;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        overflow: hidden;
+      }
+
+      section:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+      }
+
+      /* Slightly tighter type so dense slides fit one slide */
+      body {
+        font-size: 11pt;
+      }
+
+      h1 {
+        font-size: 22pt !important;
+        line-height: 1.12;
+        margin-bottom: 0.35rem !important;
+      }
+
+      h2 {
+        font-size: 13pt !important;
+        margin: 0.75rem 0 0.35rem !important;
+      }
+
+      h3 {
+        font-size: 11pt !important;
+        margin: 0.5rem 0 0.25rem !important;
+      }
+
+      .eyebrow {
+        font-size: 7pt !important;
+        margin-bottom: 0.35rem !important;
+      }
+
+      .lead {
+        font-size: 11pt !important;
+        line-height: 1.35;
+      }
+
+      pre {
+        font-size: 7.5pt !important;
+        line-height: 1.35;
+        padding: 0.35rem 0.45rem !important;
+        margin: 0.35rem 0 !important;
+      }
+
+      table {
+        font-size: 8pt !important;
+      }
+
+      th, td {
+        padding: 0.25rem 0.35rem !important;
+      }
+
+      .card {
+        padding: 0.45rem 0.55rem !important;
+        margin: 0.25rem 0 !important;
+      }
+
+      .slide-figure {
+        margin: 0.35rem 0 !important;
+      }
+
+      .slide-figure img {
+        max-height: 2.6in !important;
+        width: auto !important;
+        max-width: 100% !important;
+        object-fit: contain;
+      }
+
+      /* Speaker bio: keep photo from blowing the slide */
+      .bio-grid {
+        gap: 0.75rem !important;
+      }
+
+      .bio-photo {
+        max-height: 3.2in !important;
+        width: auto !important;
+        aspect-ratio: auto !important;
+      }
+
+      .flag-grid {
+        gap: 0.5rem !important;
+        margin-top: 0.35rem !important;
+      }
+
+      .flag-tile {
+        padding: 0.45rem 0.4rem !important;
+        min-height: 0 !important;
+      }
+
+      .flag-tile p {
+        font-size: 9pt !important;
+        line-height: 1.25 !important;
+      }
+
+      .iter-grid {
+        gap: 0.35rem !important;
+      }
+
+      .iter-grid pre {
+        font-size: 6.5pt !important;
+      }
+
+      .four-rules-grid {
+        gap: 0.4rem !important;
+      }
+
+      .four-rules-grid .card {
+        min-height: 0 !important;
+        padding: 0.4rem 0.45rem !important;
+        font-size: 9pt !important;
+      }
+
+      .do-stack {
+        gap: 0.35rem !important;
+      }
+
+      .do-tile {
+        padding: 0.35rem 0.4rem !important;
+        min-height: 0 !important;
+        font-size: 9pt !important;
+      }
+
+      ul, ol {
+        margin: 0.25rem 0 0.35rem !important;
+      }
+
+      li {
+        margin-bottom: 0.15rem !important;
+      }
     }
   </style>
 </head>
@@ -746,10 +933,7 @@
       </ul>
       <p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--brand-muted);">Источник: пресс-релиз Группы Сбер, февраль 2026</p>
     </div>
-    <figure class="slide-figure">
-      <img src="lecture_assets/slide-17.png" alt="Иллюстрация порогов 1% и 5%" width="1920" height="1080" loading="lazy" decoding="async" />
-      <figcaption>Пример масштаба существенности (стр. 17)</figcaption>
-    </figure>
+    <!-- Иллюстрация slide-17 убрана: в исходном скрине был сторонний бренд и при печати в PDF ломалась вёрстка -->
   </section>
 
   <!-- 5 ══ FRAMEWORK: активы -->
