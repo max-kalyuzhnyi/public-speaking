@@ -295,18 +295,6 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
 
-    /* Inline SVG (same look as raster slides; no external fetch — works with any base URL) */
-    .inline-svg-asset svg {
-      width: 100%;
-      max-width: 56rem;
-      height: auto;
-      border-radius: 12px;
-      border: 1px solid var(--brand-border);
-      display: block;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      background: #f8fafc;
-    }
-
     .slide-figure figcaption {
       font-size: 0.78rem;
       color: var(--brand-muted);
@@ -820,11 +808,6 @@
         object-fit: contain;
       }
 
-      .inline-svg-asset svg {
-        max-height: 2.4in !important;
-        width: 100% !important;
-      }
-
       /* Speaker bio: keep photo from blowing the slide */
       .bio-grid {
         gap: 0.75rem !important;
@@ -1070,46 +1053,10 @@
     <span class="eyebrow">Блок 0 · Фреймворк</span>
     <h1>Типы активов</h1>
     <p class="lead">Что именно вы оцениваете — и почему активы меняют всё.</p>
-    <div class="card card-accent">
-      <strong>Сдвиг в эпоху AI</strong>
-      <p style="margin:0.45rem 0 0;font-size:0.95rem;">Канал, доступ к сегменту и закреплённая дистрибуция <strong>растут в ценности</strong>. «Чистая» продуктовая технология без дистрибуции копируется быстрее — барьер падает. В промпте явно просите <strong>канал, данные, долю рынка</strong>, а не только описание фичи.</p>
-    </div>
+    <p style="margin:0 0 1rem;font-size:0.92rem;color:var(--brand-muted);">Тренд в эпоху AI: сильнее ценятся канал и доступ к сегменту; «чистая» технология без дистрибуции копируется быстрее.</p>
     <figure class="slide-figure">
-      <!-- Inline SVG: external .svg was corrupted once and breaks if HTML is opened with wrong base path -->
-      <div class="inline-svg-asset" role="img" aria-label="Сдвиг ценности: канал вверх, технология вниз по барьеру копирования">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420">
-          <defs>
-            <linearGradient id="avs-up" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#0369a1"/>
-            </linearGradient>
-            <linearGradient id="avs-down" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#64748b"/><stop offset="100%" stop-color="#94a3b8"/>
-            </linearGradient>
-            <filter id="avs-shadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
-            </filter>
-          </defs>
-          <rect width="960" height="420" fill="#f8fafc"/>
-          <g filter="url(#avs-shadow)">
-            <rect x="520" y="40" width="380" height="340" rx="16" fill="#fff" stroke="#0ea5e9" stroke-width="2"/>
-            <text x="710" y="88" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#0369a1">Канал · дистрибуция · доступ</text>
-            <text x="710" y="118" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="15" fill="#475569">Закреплённые продажи, сегмент, данные</text>
-            <path d="M 710 280 L 710 140" stroke="url(#avs-up)" stroke-width="14" stroke-linecap="round"/>
-            <polygon points="710,125 695,155 725,155" fill="#0369a1"/>
-            <text x="710" y="330" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#0369a1">↑ ценность для стратегии</text>
-          </g>
-          <g filter="url(#avs-shadow)">
-            <rect x="60" y="40" width="380" height="340" rx="16" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
-            <text x="250" y="88" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#475569">Продукт · «чистая» технология</text>
-            <text x="250" y="118" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="15" fill="#64748b">Копируется быстрее при доступе к LLM / open weights</text>
-            <path d="M 250 140 L 250 280" stroke="url(#avs-down)" stroke-width="14" stroke-linecap="round"/>
-            <polygon points="250,295 235,265 265,265" fill="#64748b"/>
-            <text x="250" y="330" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#64748b">↓ барьер копирования</text>
-          </g>
-          <text x="480" y="400" text-anchor="middle" font-family="system-ui,Segoe UI,sans-serif" font-size="14" fill="#64748b">В промпте явно просите канал, данные и долю рынка — не только описание фичи</text>
-        </svg>
-      </div>
-      <figcaption>Обновлённая схема (раньше: матрица slide-11). Копия также в <code>lecture_assets/assets-value-shift.svg</code>.</figcaption>
+      <img src="lecture_assets/slide-11.png" alt="Типы активов — ось сложность × стоимость" width="1920" height="1080" loading="lazy" decoding="async" />
+      <figcaption>Матрица активов (стр. 11)</figcaption>
     </figure>
   </section>
 
