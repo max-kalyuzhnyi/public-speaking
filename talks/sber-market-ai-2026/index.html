@@ -354,6 +354,62 @@
       line-height: 1.3;
     }
 
+    /* ─── Workflow pipeline (slide before live demo) ─── */
+    .pipeline-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0.25rem 0;
+      margin: 1.1rem 0 0.35rem;
+      width: 100%;
+    }
+
+    .pipeline-step {
+      flex: 1 1 88px;
+      min-width: 5rem;
+      max-width: 11rem;
+      background: #fff;
+      border: 1px solid var(--brand-border);
+      border-radius: 10px;
+      padding: 0.55rem 0.45rem;
+      text-align: center;
+      font-size: 0.76rem;
+      line-height: 1.32;
+    }
+
+    .pipeline-step .pipeline-label {
+      display: block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--brand-accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .pipeline-step .pipeline-hint {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--brand-muted);
+      margin-top: 0.3rem;
+    }
+
+    .pipeline-arrow {
+      align-self: center;
+      color: var(--brand-muted);
+      font-size: 1.05rem;
+      font-weight: 700;
+      flex: 0 0 1.1rem;
+      text-align: center;
+      line-height: 1;
+    }
+
+    @media (max-width: 900px) {
+      .pipeline-flow { flex-direction: column; align-items: stretch; }
+      .pipeline-arrow { transform: rotate(90deg); margin: 0.15rem 0; }
+    }
+
     /* ─── Blockquote ─── */
     blockquote {
       border-left: 3px solid var(--brand-accent);
@@ -813,6 +869,35 @@
       li {
         margin-bottom: 0.15rem !important;
       }
+
+      /* Dense pipeline slide: fit one printed page */
+      #workflow-pipeline .pipeline-flow {
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        gap: 0.1rem !important;
+        margin: 0.25rem 0 !important;
+      }
+
+      #workflow-pipeline .pipeline-step {
+        flex: 1 1 26% !important;
+        font-size: 6.5pt !important;
+        padding: 0.2rem 0.25rem !important;
+        min-width: 0 !important;
+        max-width: none !important;
+      }
+
+      #workflow-pipeline .pipeline-hint {
+        font-size: 5.5pt !important;
+      }
+
+      #workflow-pipeline .pipeline-arrow {
+        transform: none !important;
+        font-size: 7pt !important;
+      }
+
+      #assets .slide-figure img {
+        max-height: 2.15in !important;
+      }
     }
   </style>
 </head>
@@ -829,6 +914,7 @@
     <li><a href="#strategy">Стратегия</a></li>
     <li><a href="#quality-rubric">Качество</a></li>
     <li><a href="#ecosystem-daisy">Экосистема</a></li>
+    <li><a href="#workflow-pipeline">Пайплайн</a></li>
     <li><a href="#practice">Практика</a></li>
     <li><a href="#recap">Recap</a></li>
     <li><a href="#cheat-sheet">Шпаргалка</a></li>
@@ -854,8 +940,9 @@
         <li>Как правильно поставить задачу AI</li>
         <li>Guardrails: как не дать AI соврать</li>
         <li>Стратегический фильтр</li>
-        <li>Качество анализа: рубрика 0–10</li>
+        <li>Качество анализа: короткий чек-лист после TAM/SAM/SOM; полная рубрика 0–10 перед практикой</li>
         <li>Экосистема Сбера — раздатка для discovery</li>
+        <li>Пайплайн: от запроса к верифицированной оценке (перед демо)</li>
         <li>Практика: четыре итерации промпта</li>
       </ol>
     </div>
@@ -924,11 +1011,12 @@
     </ol>
   </section>
 
-  <!-- 4 ══ FRAMEWORK: существенность -->
-  <section id="materiality">
-    <span class="eyebrow">Блок 0 · Фреймворк</span>
-    <h1>Существенность</h1>
-    <p>Порог: <strong>1% выручки / 5% PBT или EBITDA</strong> — калибруйте под компанию.</p>
+  <!-- 4a ══ FRAMEWORK: существенность — большая экосистема -->
+  <section id="materiality-ecosystem">
+    <span class="eyebrow">Блок 0 · Фреймворк · часть 1 из 2</span>
+    <h1>Существенность в большой экосистеме</h1>
+    <p class="lead">Порог «заметности» для проекта задаётся масштабом материнской компании. Калибруйте под фактические KPI.</p>
+    <p>Аудиторский ориентир: <strong>1% выручки / 5% PBT или EBITDA</strong> — не универсальное правило, а способ мыслить порядки величин.</p>
     <div class="card card-accent">
       <strong>Пример — Группа Сбер, МСФО 2025</strong>
       <ul style="margin-top:0.5rem;">
@@ -937,10 +1025,27 @@
       </ul>
       <p style="margin:0.5rem 0 0;font-size:0.82rem;color:var(--brand-muted);">Источник: пресс-релиз Группы Сбер, февраль 2026</p>
     </div>
+    <div class="card" style="margin-top:1rem;">
+      <strong>Другой порядок — экосистема уровня Яндекса</strong>
+      <p style="margin:0.5rem 0 0;font-size:0.93rem;">Там «заметный» внутренний проект часто измеряется <strong>единицами–десятками млрд ₽/год</strong>, а не сотнями миллионов — снова из-за масштаба выручки и числа продуктов. Цифры ориентировочные; перед выступлением сверяйте с актуальными публичными материалами.</p>
+    </div>
     <figure class="slide-figure">
       <img src="lecture_assets/slide-17.png" alt="Иллюстрация порогов 1% и 5%" width="1920" height="1080" loading="lazy" decoding="async" />
       <figcaption>Пример масштаба существенности (стр. 17)</figcaption>
     </figure>
+  </section>
+
+  <!-- 4b ══ FRAMEWORK: существенность — автономный продукт / VC -->
+  <section id="materiality-standalone">
+    <span class="eyebrow">Блок 0 · Фреймворк · часть 2 из 2</span>
+    <h1>Автономный продукт и VC-логика</h1>
+    <p class="lead">Вне экосистемы «миллиардной» выручки порог другой: важны горизонт окупаемости и потенциал масштабирования, а не доля в консолидированной отчётности.</p>
+    <ul>
+      <li><strong>Горизонт 5+ лет</strong> — типичный горизонт, на котором оценивают способность бизнеса вырасти до значимой выручки.</li>
+      <li><strong>Связка инвестиция → будущая стоимость</strong> — если в бизнес вложены десятки миллионов ₽, без траектории к выручке порядка <strong>~1 млрд ₽+</strong> (иллюстративно, не формула) инвестиция может не иметь финансового смысла для фонда.</li>
+      <li><strong>Новый рынок</strong> — оценивайте заменяемые расходы и текущие альтернативы (клиенты уже платят «по-другому»); TAM «с нуля» часто берут с соседних трат.</li>
+    </ul>
+    <p style="font-size:0.85rem;color:var(--brand-muted);">Иллюстративные ориентиры, не формальный критерий отбора на программе и не инвестиционная рекомендация.</p>
   </section>
 
   <!-- 5 ══ FRAMEWORK: активы -->
@@ -948,9 +1053,13 @@
     <span class="eyebrow">Блок 0 · Фреймворк</span>
     <h1>Типы активов</h1>
     <p class="lead">Что именно вы оцениваете — и почему активы меняют всё.</p>
+    <div class="card card-accent">
+      <strong>Сдвиг в эпоху AI</strong>
+      <p style="margin:0.45rem 0 0;font-size:0.95rem;">Канал, доступ к сегменту и закреплённая дистрибуция <strong>растут в ценности</strong>. «Чистая» продуктовая технология без дистрибуции копируется быстрее — барьер падает. В промпте явно просите <strong>канал, данные, долю рынка</strong>, а не только описание фичи.</p>
+    </div>
     <figure class="slide-figure">
-      <img src="lecture_assets/slide-11.png" alt="Типы активов — ось сложность × стоимость" width="1920" height="1080" loading="lazy" decoding="async" />
-      <figcaption>Матрица активов (стр. 11)</figcaption>
+      <img src="lecture_assets/assets-value-shift.svg" alt="Сдвиг ценности: канал вверх, технология вниз по барьеру копирования" width="960" height="420" loading="lazy" decoding="async" />
+      <figcaption>Обновлённая схема (раньше: матрица slide-11)</figcaption>
     </figure>
   </section>
 
@@ -970,6 +1079,19 @@
       <img src="lecture_assets/slide-24.png" alt="TAM / SAM / SOM" width="1920" height="1080" loading="lazy" decoding="async" />
       <figcaption>Стр. 24</figcaption>
     </figure>
+  </section>
+
+  <!-- 6b ══ FRAMEWORK: чек-лист качества (кратко; полная рубрика — quality-rubric) -->
+  <section id="checklist-preview">
+    <span class="eyebrow">Блок 0 · Фреймворк</span>
+    <h1>Чек-лист качества — по чему судим отчёт</h1>
+    <p class="lead">Короткая «линза»: дальше в лекции разберём ИИ и guardrails; <strong>полная рубрика с весами a–d и баллами</strong> — на слайде <a href="#quality-rubric">«Качество анализа»</a> перед практикой (тот же чек-лист повторим там).</p>
+    <ul class="checklist">
+      <li><strong>TAM / SAM / SOM</strong> — заданы явно и согласованы с методом и допущениями.</li>
+      <li><strong>Воронка SAM</strong> — убраны нецелевые сегменты и каналы.</li>
+      <li><strong>SOM</strong> — согласован с конкурентами и реалистичной долей.</li>
+      <li><strong>Горизонт выхода на SOM</strong> — связан с командой, каналом и инвестициями.</li>
+    </ul>
   </section>
 
   <!-- 7a ══ CHANGED: контекст -->
@@ -1272,7 +1394,7 @@
   <section id="quality-rubric">
     <span class="eyebrow">Блок 4b · Качество анализа</span>
     <h1>Внутренние критерии и рубрика 0–10</h1>
-    <p class="lead">Перед тем как верить цифрам в отчёте — четыре обязательные проверки.</p>
+    <p class="lead">Продолжение <a href="#checklist-preview">краткого чек-листа</a> сразу после TAM/SAM/SOM — здесь полные формулировки и веса. Перед тем как верить цифрам в отчёте — четыре обязательные проверки.</p>
     <ul>
       <li><strong>TAM / SAM / SOM</strong> заданы явно и согласованы с расчётом (не «голые» числа).</li>
       <li><strong>Воронка SAM</strong> очищена от нецелевых сегментов и каналов.</li>
@@ -1297,11 +1419,58 @@
     <span class="eyebrow">Блок 4c · Экосистема</span>
     <h1>Портфель сфер жизни («ромашка»)</h1>
     <p class="lead">Раздатка в Markdown — для <strong>product discovery</strong>: прогоните свой продукт по схеме, найдите лепесток, где логична точка входа, кто может быть <strong>ЛПР</strong>, с кем стоит поговорить в B2B-цепочке.</p>
+    <div class="card" style="border-left:3px solid var(--brand-muted);">
+      <p style="margin:0;font-size:0.88rem;color:var(--brand-muted);"><strong>Disclaimer:</strong> схема подготовлена в учебных целях и не претендует на полноту покрытия экосистемы Группы — используйте как ориентир для размышлений и точки входа к внутренним данным.</p>
+    </div>
     <p><a href="handouts/sber-ecosystem-life-spheres.md"><code>handouts/sber-ecosystem-life-spheres.md</code></a></p>
     <figure class="slide-figure">
       <img src="lecture_assets/sber-ecosystem-daisy.png" alt="Портфель сфер жизни — схема экосистемы" width="1200" height="800" loading="lazy" decoding="async" />
       <figcaption>Схема макро-экосистем и ролей; подробности и вопросы для discovery — в раздатке.</figcaption>
     </figure>
+  </section>
+
+  <!-- 20d ══ WORKFLOW: синтез перед живой практикой -->
+  <section id="workflow-pipeline">
+    <span class="eyebrow">Блок 4d · Перед демо</span>
+    <h1>От запроса к верифицированной оценке</h1>
+    <p class="lead">Один проход теми же шагами, что вы услышали в блоках про framing, guardrails и стратегию — дальше покажу на экране.</p>
+    <div class="pipeline-flow" aria-label="Цепочка шагов">
+      <div class="pipeline-step">
+        <span class="pipeline-label">1 · Scope</span>
+        Границы рынка, гео, период, метод
+        <span class="pipeline-hint">«Bottom-up, РФ, 2025–2026…»</span>
+      </div>
+      <span class="pipeline-arrow" aria-hidden="true">→</span>
+      <div class="pipeline-step">
+        <span class="pipeline-label">2 · Черновик AI</span>
+        Первый ответ модели
+        <span class="pipeline-hint">Часто круглые цифры</span>
+      </div>
+      <span class="pipeline-arrow" aria-hidden="true">→</span>
+      <div class="pipeline-step">
+        <span class="pipeline-label">3 · Уточнение</span>
+        Таблица TAM/SAM/SOM, допущения, bottom-up
+        <span class="pipeline-hint">Источники по строкам</span>
+      </div>
+      <span class="pipeline-arrow" aria-hidden="true">→</span>
+      <div class="pipeline-step">
+        <span class="pipeline-label">4 · Verify</span>
+        Публичный игрок, adversarial, свежесть данных
+        <span class="pipeline-hint">Красные флаги</span>
+      </div>
+      <span class="pipeline-arrow" aria-hidden="true">→</span>
+      <div class="pipeline-step">
+        <span class="pipeline-label">5 · Стратегия</span>
+        Опционально
+        <span class="pipeline-hint">Попадание в приоритеты</span>
+      </div>
+      <span class="pipeline-arrow" aria-hidden="true">→</span>
+      <div class="pipeline-step">
+        <span class="pipeline-label">6 · Рубрика</span>
+        Оценка 0–10 по a–d
+        <span class="pipeline-hint"><a href="#quality-rubric">Чек-лист</a></span>
+      </div>
+    </div>
   </section>
 
   <!-- 21 ══ PRACTICE: вводный + 4 итерации промпта -->
